@@ -20,14 +20,14 @@ const HomePage: FunctionComponent<Props> = (props) => {
           "text-6xl font-semibold text-white drop-shadow-md",
           font.className,
         )}>
-          🔐Auth
+          🔐 NextAuth
         </h1>
         <p className="text-white text-lg">
           A simple authentication service.
         </p>
 
         <LoginButton>
-          <Button variant="secondary" size="lg">
+          <Button variant="secondary" size="lg" className="mt-1">
             Sign in
           </Button>
         </LoginButton>

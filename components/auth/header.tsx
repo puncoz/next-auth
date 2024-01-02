@@ -18,7 +18,7 @@ const Header: FunctionComponent<Props> = ({ label }) => {
         "text-3xl font-semibold",
         font.className,
       )}>
-        🔐 Auth
+        🔐 NextAuth
       </h1>
 
       <p className="text-muted-foreground text-sm">
