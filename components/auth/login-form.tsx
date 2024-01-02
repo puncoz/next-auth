@@ -1,4 +1,5 @@
 "use client"
+import { login } from "@/actions/login"
 import CardWrapper from "@/components/auth/card-wrapper"
 import FormError from "@/components/form-error"
 import FormSuccess from "@/components/form-success"
@@ -7,13 +8,17 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { LoginSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 type Props = {};
 
 const LoginForm: FunctionComponent<Props> = (props) => {
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string>()
+  const [success, setSuccess] = useState<string>()
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -23,7 +28,15 @@ const LoginForm: FunctionComponent<Props> = (props) => {
   })
 
   const submit = (values: z.infer<typeof LoginSchema>) => {
+    setError("")
+    setSuccess("")
 
+    startTransition(() => {
+      login(values).then(data => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
+    })
   }
 
   return (
@@ -41,6 +54,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                            <FormLabel>Email</FormLabel>
                            <FormControl>
                              <Input {...field}
+                                    disabled={isPending}
                                     placeholder="john.doe@example.com"
                                     type="email"/>
                            </FormControl>
@@ -55,6 +69,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                            <FormLabel>Password</FormLabel>
                            <FormControl>
                              <Input {...field}
+                                    disabled={isPending}
                                     placeholder="********"
                                     type="password"/>
                            </FormControl>
@@ -63,10 +78,10 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                        )}/>
           </div>
 
-          <FormError message=""/>
-          <FormSuccess message=""/>
+          <FormError message={error}/>
+          <FormSuccess message={success}/>
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled={isPending}>
             Login
           </Button>
         </form>
