@@ -23,12 +23,14 @@ export const {
   },
 
   callbacks: {
-    signIn: async ({ user }) => {
+    signIn: async ({ user, account }) => {
+      if (account?.provider !== "credentials") {
+        return true
+      }
+
       const dbUser = await getUserById(user.id)
 
-      // return !(!dbUser || !dbUser.email_verified_at)
-
-      return true
+      return !(!dbUser || !dbUser.emailVerified)
     },
 
     session: async ({ token, session }) => {
