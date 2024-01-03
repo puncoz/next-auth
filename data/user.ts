@@ -25,3 +25,10 @@ interface IRegisterUser {
 export const registerUser = async (data: IRegisterUser) => {
   await db.user.create({ data })
 }
+
+export const updateEmailVerified = async (id: string, emailVerified: Date | null) => {
+  await db.user.update({
+    where: { id },
+    data: { emailVerified },
+  })
+}

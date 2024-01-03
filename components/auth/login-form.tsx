@@ -8,13 +8,21 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { LoginSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import React, { FunctionComponent, useState, useTransition } from "react"
+import { useSearchParams } from "next/navigation"
+import React, { FunctionComponent, useMemo, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 type Props = {};
 
 const LoginForm: FunctionComponent<Props> = (props) => {
+  const searchParams = useSearchParams()
+  const urlError = useMemo(() => {
+    const error = searchParams.get("error")
+
+    return error === "OAuthAccountNotLinked" ? "Email already in use with different provider!" : ""
+  }, [searchParams])
+
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string>()
   const [success, setSuccess] = useState<string>()
@@ -78,7 +86,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                        )}/>
           </div>
 
-          <FormError message={error}/>
+          <FormError message={error || urlError}/>
           <FormSuccess message={success}/>
 
           <Button type="submit" className="w-full" disabled={isPending}>
