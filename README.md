@@ -15,5 +15,6 @@
 
 - Email login (Credential provider)
 - Social login (Google and GitHub provider)
-- Email Registration
-- Email Verification
+- Email registration
+- Email verification
+- Forget password

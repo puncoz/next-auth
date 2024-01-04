@@ -32,3 +32,10 @@ export const updateEmailVerified = async (id: string, emailVerified: Date | null
     data: { emailVerified },
   })
 }
+
+export const updatePassword = async (id: string, password: string) => {
+  await db.user.update({
+    where: { id },
+    data: { password },
+  })
+}
