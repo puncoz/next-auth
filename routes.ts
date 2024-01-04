@@ -4,6 +4,7 @@
  */
 export const publicRoutes: string[] = [
   "/",
+  "/auth/verify",
 ]
 
 /**

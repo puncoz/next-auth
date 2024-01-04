@@ -3164,6 +3164,7 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.49.2"
     react-icons: "npm:^4.12.0"
+    react-spinners: "npm:^0.13.8"
     resend: "npm:^2.1.0"
     tailwind-merge: "npm:^2.2.0"
     tailwindcss: "npm:^3.3.0"
@@ -3762,6 +3763,16 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
+  languageName: node
+  linkType: hard
+
+"react-spinners@npm:^0.13.8":
+  version: 0.13.8
+  resolution: "react-spinners@npm:0.13.8"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 59a030ece288f045a443e0b720c94636fc00667bcb8cd5a36ed8342cc2bc52a98106a676875551b3389ae5943bd7c4d4aa2ede0fb914bbde4322211f0f0120a8
   languageName: node
   linkType: hard
 
