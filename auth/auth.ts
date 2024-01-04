@@ -1,4 +1,5 @@
 import authConfig from "@/auth/auth.config"
+import { getTwoFactorConfirmationByUserId, removeTwoFactorConfirmation } from "@/data/two-factor-confirmation"
 import { getUserById, updateEmailVerified } from "@/data/user"
 import { db } from "@/lib/db"
 import { PrismaAdapter } from "@auth/prisma-adapter"
@@ -30,7 +31,21 @@ export const {
 
       const dbUser = await getUserById(user.id)
 
-      return !(!dbUser || !dbUser.emailVerified)
+      if (!dbUser || !dbUser.emailVerified) {
+        return false
+      }
+
+      if (dbUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(dbUser.id)
+
+        if (!twoFactorConfirmation) {
+          return false
+        }
+
+        await removeTwoFactorConfirmation(twoFactorConfirmation.id)
+      }
+
+      return true
     },
 
     session: async ({ token, session }) => {

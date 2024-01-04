@@ -18,3 +18,4 @@
 - Email registration
 - Email verification
 - Forget password
+- Two factor token
