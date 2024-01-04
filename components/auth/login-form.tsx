@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { LoginSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import React, { FunctionComponent, useMemo, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
@@ -82,6 +83,11 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                                     type="password"/>
                            </FormControl>
                            <FormMessage/>
+                           <Button size="sm" variant="link" asChild className="px-0 font-normal">
+                             <Link href={"/auth/forgot-password"}>
+                               Forgot password?
+                             </Link>
+                           </Button>
                          </FormItem>
                        )}/>
           </div>
