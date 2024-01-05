@@ -1,5 +1,6 @@
 import ProtectedNavbar from "@/app/(protected)/_components/navbar"
 import { auth } from "@/auth/auth"
+import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "next-auth/react"
 import React, { FunctionComponent, type ReactNode } from "react"
 
@@ -12,6 +13,8 @@ const ProtectedLayout: FunctionComponent<Props> = async ({ children }) => {
 
   return (
     <SessionProvider session={session}>
+      <Toaster/>
+
       <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center
             bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
         <ProtectedNavbar/>
