@@ -61,6 +61,8 @@ export const {
         session.user.role = token.role as UserRole
       }
 
+      session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
+
       return session
     },
 
@@ -75,6 +77,7 @@ export const {
       }
 
       token.role = dbUser.role
+      token.isTwoFactorEnabled = dbUser.isTwoFactorEnabled
 
       return token
     },
