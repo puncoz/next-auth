@@ -8,7 +8,7 @@ const ServerPage: FunctionComponent<Props> = async (props) => {
   const user = await currentUser()
 
   return (
-    <UserInfo user={user} label="💻 Server component"/>
+    <UserInfo user={user} label="💻 User Info (Server component)"/>
   )
 }
 
