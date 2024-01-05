@@ -1,24 +1,26 @@
-import { auth, signOut } from "@/auth/auth"
+"use client"
+import { logout } from "@/actions/logout"
+import LogoutButton from "@/components/auth/logout-button"
 import { Button } from "@/components/ui/button"
-import React from "react"
+import { useCurrentUser } from "@/hooks/useCurrentUser"
+import React, { type FunctionComponent } from "react"
 
 type Props = {};
 
-const SettingsPage = async (props: Props) => {
-  const session = await auth()
+const SettingsPage: FunctionComponent<Props> = (props) => {
+  const user = useCurrentUser()
+
+  const handleOnClick = async () => {
+    await logout()
+  }
 
   return (
-    <div className="h-screen bg-slate-800 text-white">
-      {JSON.stringify(session)}
-      <form action={async () => {
-        "use server"
+    <div className="bg-white p-10 rounded-xl">
+      <Button type="submit" onClick={handleOnClick}>
+        Sign out
+      </Button>
 
-        await signOut()
-      }}>
-        <Button type="submit">
-          Sign out
-        </Button>
-      </form>
+      <LogoutButton/>
     </div>
   )
 }
