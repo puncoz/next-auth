@@ -23,6 +23,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
 
     return error === "OAuthAccountNotLinked" ? "Email already in use with different provider!" : ""
   }, [searchParams])
+  const callBackUrl = useMemo(() => searchParams.get("callbackUrl") || undefined, [searchParams])
 
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string>()
@@ -42,7 +43,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
     setSuccess("")
 
     startTransition(async () => {
-      login(values).then((data) => {
+      login(values, callBackUrl).then((data) => {
         if (data?.error) {
           form.reset()
           setError(data?.error)
@@ -86,7 +87,7 @@ const LoginForm: FunctionComponent<Props> = (props) => {
                            <FormMessage/>
                          </FormItem>
                        )}/>
-            ) : (
+          ) : (
             <div className="space-y-4">
               <FormField control={form.control}
                          name="email"

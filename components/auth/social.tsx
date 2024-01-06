@@ -1,16 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { signIn } from "next-auth/react"
-import React, { FunctionComponent } from "react"
+import { useSearchParams } from "next/navigation"
+import React, { FunctionComponent, useMemo } from "react"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
 
 type Props = {};
 
 const Social: FunctionComponent<Props> = (props) => {
+  const searchParams = useSearchParams()
+  const callBackUrl = useMemo(() => searchParams.get("callbackUrl") || undefined, [searchParams])
+
   const handleOnClick = async (provider: "google" | "github") => {
     await signIn(provider, {
-      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+      callbackUrl: callBackUrl || DEFAULT_LOGIN_REDIRECT,
     })
   }
 
