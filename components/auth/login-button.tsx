@@ -1,4 +1,6 @@
 "use client"
+import LoginForm from "@/components/auth/login-form"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { useRouter } from "next/navigation"
 import React, { FunctionComponent, ReactNode } from "react"
 
@@ -17,7 +19,15 @@ const LoginButton: FunctionComponent<Props> = ({ children, mode = "redirect", as
 
   if (mode === "modal") {
     return (
-      <span>Modal</span>
+      <Dialog>
+        <DialogTrigger asChild={asChild}>
+          {children}
+        </DialogTrigger>
+
+        <DialogContent className="p-0 w-auto bg-transparent border-none">
+          <LoginForm/>
+        </DialogContent>
+      </Dialog>
     )
   }
 

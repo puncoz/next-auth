@@ -26,11 +26,19 @@ const HomePage: FunctionComponent<Props> = (props) => {
           A simple authentication service.
         </p>
 
-        <LoginButton>
-          <Button variant="secondary" size="lg" className="mt-1">
-            Sign in
-          </Button>
-        </LoginButton>
+        <div className="flex gap-x-2">
+          <LoginButton mode="modal">
+            <Button variant="default" size="lg" className="mt-1">
+              Sign in (modal)
+            </Button>
+          </LoginButton>
+
+          <LoginButton>
+            <Button variant="secondary" size="lg" className="mt-1">
+              Sign in (page)
+            </Button>
+          </LoginButton>
+        </div>
       </div>
     </main>
   )
