@@ -19,5 +19,7 @@
 - Email verification
 - Forget password
 - Two factor token
-- Role based actions
+- Role based actions (Admin and user role)
+- Update user profile, change password, update email with reverification and change role
+- Enable and disable two factor from settings
 - Reusable components and logic for both server and client components.
