@@ -42,7 +42,7 @@ export const updatePassword = async (id: string, password: string) => {
 }
 
 export const updateUser = async (id: string, data: Partial<User>) => {
-  await db.user.update({
+  return db.user.update({
     where: { id },
     data,
   })

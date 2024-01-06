@@ -1,4 +1,5 @@
 import authConfig from "@/auth/auth.config"
+import { getAccountByUserId } from "@/data/accounts"
 import { getTwoFactorConfirmationByUserId, removeTwoFactorConfirmation } from "@/data/two-factor-confirmation"
 import { getUserById, updateEmailVerified } from "@/data/user"
 import { db } from "@/lib/db"
@@ -11,6 +12,7 @@ export const {
   auth,
   signIn,
   signOut,
+  update: updateSession,
 } = NextAuth({
   pages: {
     signIn: "/auth/login",
@@ -63,6 +65,7 @@ export const {
 
       session.user.name = token.name
       session.user.email = token.email
+      session.user.isOAuthAccount = token.isOAuthAccount as boolean
 
       session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
 
@@ -78,6 +81,9 @@ export const {
       if (!dbUser) {
         return token
       }
+
+      const existingAccount = await getAccountByUserId(dbUser.id)
+      token.isOAuthAccount = !!existingAccount
 
       token.name = dbUser.name
       token.email = dbUser.email
