@@ -1,4 +1,5 @@
 import { db } from "@/lib/db"
+import type { User } from "@prisma/client"
 
 export const getUserByEmail = async (email: string) => {
   try {
@@ -37,5 +38,12 @@ export const updatePassword = async (id: string, password: string) => {
   await db.user.update({
     where: { id },
     data: { password },
+  })
+}
+
+export const updateUser = async (id: string, data: Partial<User>) => {
+  await db.user.update({
+    where: { id },
+    data,
   })
 }

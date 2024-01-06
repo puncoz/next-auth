@@ -1,27 +1,25 @@
-"use client"
-import { logout } from "@/actions/logout"
-import LogoutButton from "@/components/auth/logout-button"
-import { Button } from "@/components/ui/button"
-import { useCurrentUser } from "@/hooks/useCurrentUser"
+import SettingsForm from "@/components/auth/settings-form"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { currentUser } from "@/lib/auth"
 import React, { type FunctionComponent } from "react"
 
 type Props = {};
 
-const SettingsPage: FunctionComponent<Props> = (props) => {
-  const user = useCurrentUser()
-
-  const handleOnClick = async () => {
-    await logout()
-  }
+const SettingsPage: FunctionComponent<Props> = async (props) => {
+  const user = await currentUser()
 
   return (
-    <div className="bg-white p-10 rounded-xl">
-      <Button type="submit" onClick={handleOnClick}>
-        Sign out
-      </Button>
+    <Card className="w-[600px]">
+      <CardHeader>
+        <p className="text-2xl font-semibold text-center">
+          🛠️️ Settings
+        </p>
+      </CardHeader>
 
-      <LogoutButton/>
-    </div>
+      <CardContent>
+        <SettingsForm user={user}/>
+      </CardContent>
+    </Card>
   )
 }
 

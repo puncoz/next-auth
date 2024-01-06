@@ -19,3 +19,5 @@
 - Email verification
 - Forget password
 - Two factor token
+- Role based actions
+- Reusable components and logic for both server and client components.

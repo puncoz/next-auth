@@ -61,6 +61,9 @@ export const {
         session.user.role = token.role as UserRole
       }
 
+      session.user.name = token.name
+      session.user.email = token.email
+
       session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
 
       return session
@@ -76,6 +79,8 @@ export const {
         return token
       }
 
+      token.name = dbUser.name
+      token.email = dbUser.email
       token.role = dbUser.role
       token.isTwoFactorEnabled = dbUser.isTwoFactorEnabled
 
